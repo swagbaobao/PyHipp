@@ -57,8 +57,8 @@ with lock:
         else:
             # get and remove env from clist
             # add code here
-            env = os.environ['CONDA_DEFAULT_ENV']
-            clist.remove(env)
+            env = clist[0]
+            del clist[0]
             # return env name
             print(env)
 
