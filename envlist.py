@@ -44,7 +44,7 @@ with lock:
         # prefix envprefix
         # add code here
         clist = []
-        for i in range(nenvs):
+        for i in range(int(nenvs)):
             clist.append(envprefix + str(i))
     else:
         # load hickle file
