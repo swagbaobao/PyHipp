@@ -4,8 +4,8 @@ import hickle as hkl
 import os
 import numpy as np
 import PyHipp as pyh
+from .misc import getChannelInArray
 import PanGUI
-from PyHipp.misc import getChannelInArray
 
 class Waveform(DPT.DPObject):
     # Please change the class name according to your needs
@@ -49,12 +49,6 @@ class Waveform(DPT.DPObject):
         # .........................................
         pwd = os.path.normpath(os.getcwd());
         
-        aname = DPT.levels.normpath(os.path.dirname(pwd))
-        self.array_dict = dict()
-        self.array_dict[aname] = 0
-        self.numSets = 1
-        self.current_plot_type = None
-        
         # 'channelxxx, xxx is the number of the channel'
         self.channel_filename = [os.path.basename(pwd)]  
         template_filename = os.path.join(            
@@ -75,11 +69,11 @@ class Waveform(DPT.DPObject):
             # create empty object if data is empty
             DPT.DPObject.create(self, dirs=[], *args, **kwargs)            
         
-        # aname = DPT.levels.normpath(os.path.dirname(pwd))
-        # self.array_dict = dict()
-        # self.array_dict[aname] = 0
-        # self.numSets = 1
-        # self.current_plot_type = None
+        aname = DPT.levels.normpath(os.path.dirname(pwd))
+        self.array_dict = dict()
+        self.array_dict[aname] = 0
+        self.numSets = 1
+        self.current_plot_type = None
 
         
     def append(self, wf):
@@ -184,15 +178,11 @@ class Waveform(DPT.DPObject):
             if i == 0:
                 cstart = 0
                 cend = advals[0]
-            elif i>0:
+            elif i>=1:
                 cstart = advals[i-1] + 1
                 cend = advals[i]
                 
             currch = cstart
-            
-            # plotOpts['LabelsOff'] = True
-            # plotOpts['TicksOff'] = True
-            # plotOpts['TitleOff'] = True
             
             while currch <= cend :
                 # get channel name
