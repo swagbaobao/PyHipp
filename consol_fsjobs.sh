@@ -16,5 +16,9 @@ done
 cmd1=${cmd1::-1}
 cmd1="${cmd1} /data/src/PyHipp/fsall-slurm.sh"
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a682ada5a5c2df8d996eb6b351a715b451fc834d
 echo $cmd1
 eval $cmd1

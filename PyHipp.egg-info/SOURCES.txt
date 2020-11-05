@@ -23,10 +23,15 @@ PyHipp/umaze.py
 PyHipp/unity.py
 PyHipp/vmhighpass.py
 PyHipp/vmlfp.py
+<<<<<<< HEAD
 PyHipp/vmplacecell.py
 PyHipp/vmplot.py
 PyHipp/vmraw.py
 PyHipp/waveform.py
+=======
+PyHipp/vmplot.py
+PyHipp/vmraw.py
+>>>>>>> a682ada5a5c2df8d996eb6b351a715b451fc834d
 PyHipp.egg-info/PKG-INFO
 PyHipp.egg-info/SOURCES.txt
 PyHipp.egg-info/dependency_links.txt

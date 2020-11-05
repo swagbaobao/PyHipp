@@ -6,7 +6,11 @@ import sys
 
 # set constants
 file_path = "/data/picasso/envlist.hkl"
+<<<<<<< HEAD
+lock_path = "/data/picasso/envlist.hkl.lock"
+=======
 lock_path = "/data/picasso/envlist.khl.lock"
+>>>>>>> upstream/master
 time_out_secs = 60
 
 # program modes
@@ -20,6 +24,24 @@ if nargs > 3:
     print('Usage: envlist; envlist env; envlist envprefix nenvs')
     exit
 elif nargs > 2:
+<<<<<<< HEAD
+    # creates or re-creates the list of environments
+    pmode = RESET_MODE
+    # get prefix for environment name
+    envprefix = sys.argv[1]
+    # get number of environments to create
+    nenvs = sys.argv[2]
+elif nargs > 1:
+    # returns env to the list of environments
+    pmode = WRITE_MODE
+    # get name of environment to return
+    env = sys.argv[1]
+else:
+    # gets name of an environment to use
+    pmode = READ_MODE
+
+# creates a lock for the file so it can only be accessed one at a time
+=======
     pmode = RESET_MODE
     envprefix = sys.argv[1]
     nenvs = sys.argv[2]
@@ -29,22 +51,43 @@ elif nargs > 1:
 else:
     pmode = READ_MODE
 
+>>>>>>> upstream/master
 lock = FileLock(lock_path, timeout=time_out_secs)
 
 with lock:
     if pmode == RESET_MODE:
+<<<<<<< HEAD
+        # create a list (named clist) of nevns environments with the 
+        # prefix envprefix
+        # add code here
+        clist = []
+        for i in range(int(nenvs)):
+            clist.append(envprefix + str(i))
+=======
         clist1 = [*range(0,int(nenvs),1)]
         clist = [envprefix + str(s) for s in clist1]
+>>>>>>> upstream/master
     else:
         # load hickle file
         clist = hickle.load(file_path)
 
         if pmode == WRITE_MODE:
+<<<<<<< HEAD
+            # append env to the clist
+            # add code here
+            clist.append(env)
+        else:
+            # get and remove env from clist
+            # add code here
+            env = clist[0]
+            del clist[0]
+=======
             # append item to end of list
             clist.append(env)
         else:    
             # pop first item off list
             env = clist.pop(0)
+>>>>>>> upstream/master
             # return env name
             print(env)
 
