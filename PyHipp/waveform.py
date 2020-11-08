@@ -160,18 +160,36 @@ class Waveform(DPT.DPObject):
         ######################################################################
         #################### start plotting ##################################
         ######################################################################
+<<<<<<< HEAD
         
         fig = ax.figure  # get the parent figure of the ax
         
+=======
+>>>>>>> upstream/master
         if plot_type == 'Channel':  # plot in channel level
             if self.current_plot_type == 'Array':
-                self.remove_subplots(fig)
+                fig = ax.figure  # get the parent figure of the ax
+                for x in fig.get_axes():  # remove all axes in current figure
+                    x.remove()    
                 ax = fig.add_subplot(1,1,1)
                 
+<<<<<<< HEAD
             self.plot_data(i, ax, plotOpts, True)    
                 
         elif plot_type == 'Array':
             self.remove_subplots(fig)
+=======
+            # plot the mountainsort data according to the current index 'i'
+            self.plot_data(i, ax, plotOpts, 1)
+            self.current_plot_type = 'Channel'
+                    
+        elif plot_type == 'Array':  # plot in channel level
+            fig = ax.figure  # get the parent figure of the ax
+            for x in fig.get_axes():  # remove all axes in current figure
+                x.remove()    
+
+            # get values in array_dict
+>>>>>>> upstream/master
             advals = np.array([*self.array_dict.values()])
             # set the starting index cstart for array i
             # set the ending index cend for array i
@@ -188,7 +206,11 @@ class Waveform(DPT.DPObject):
                 # get channel name
                 currchname = self.dirs[currch]
                 # get axis position for channel
+<<<<<<< HEAD
                 ax, isCorner = getChannelInArray(currchname, fig)
+=======
+                ax,isCorner = getChannelInArray(currchname, fig)
+>>>>>>> upstream/master
                 self.plot_data(currch, ax, plotOpts, isCorner)
                 currch += 1
         
@@ -217,6 +239,7 @@ class Waveform(DPT.DPObject):
             # pass  # you may delete this line
     
         
+<<<<<<< HEAD
     
         ########labels###############
         # if not plotOpts['TitleOff']:  # if TitleOff icon in the right-click menu is clicked
@@ -262,3 +285,22 @@ class Waveform(DPT.DPObject):
     # This will greatly increase the efficiency in maintaining the codes,
     # especially for those lines that are used for multiple times in multiple places.
     # Other than that, this will also greatly increase the readability of the code
+=======
+    def plot_data(self, ind, ax, plotOpts, isCorner):
+        # plot the mountainsort data according to the index 'ind'
+        y = self.data[ind]
+        x = np.arange(y.shape[0])
+        ax.plot(x, y)
+
+        ########labels###############
+        if not plotOpts['TitleOff']:  # if TitleOff icon in the right-click menu is clicked
+            ax.set_title(self.dirs[ind])
+                
+        if (not plotOpts['LabelsOff']) or isCorner:  # if LabelsOff icon in the right-click menu is clicked
+            ax.set_xlabel('Time (sample unit)')
+            ax.set_ylabel('Voltage (uV)')
+            
+        if plotOpts['TicksOff'] or (not isCorner):
+            ax.set_xticks([])
+            ax.set_yticks([])
+>>>>>>> upstream/master
